@@ -1,20 +1,25 @@
+#
+# Conditional build:
+%bcond_with	sysfs	# use sysfs to scan for ttyUSB
+#
 Summary:	A library for easy access to smart cards (chipcards)
 Summary(pl):	Biblioteka do ³atwego dostêpu do kart procesorowych
 Name:		libchipcard2
-# "beta" is constant suffix added to all releases before stable version,
-# no need to move it to release - there won't be 1.9.19 non-beta release
-Version:	1.9.19beta
+Version:	2.0
 Release:	1
 License:	GPL v2 with OpenSSL linking exception
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libchipcard/%{name}-%{version}.tar.gz
-# Source0-md5:	c8f3e08474a893890c4d221288c9e7a6
+# Source0-md5:	7c76464250ca49522c753f305c450b1b
 URL:		http://www.libchipcard.de/
-BuildRequires:	gwenhywfar-devel >= 1.99.1
+BuildRequires:	gwenhywfar-devel >= 1.99.5
 BuildRequires:	libusb-devel
 BuildRequires:	opensc-devel >= 0.9.4
 BuildRequires:	pkgconfig
-BuildRequires:	sysfsutils-devel
+%if %{with sysfs}
+BuildRequires:	sysfsutils-devel >= 1.3.0-3
+BuildRequires:	sysfsutils-devel < 2.0
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -41,9 +46,9 @@ Summary:	libchipcard server development kit
 Summary(pl):	Pliki programistyczne serwera libchipcard
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	gwenhywfar-devel >= 1.99.1
+Requires:	gwenhywfar-devel >= 1.99.5
 Requires:	libusb-devel
-Requires:	sysfsutils-devel
+%{?with_sysfs:Requires:	sysfsutils-devel >= 1.3.0-3}
 
 %description devel
 This package contains chipcard2-server-config and header files for
@@ -61,6 +66,7 @@ kart dla libchipcard.
 %build
 # pcmcia code needs fix to use userspace headers
 %configure \
+	%{!?with_sysfs:ac_cv_header_sysfs_libsysfs_h=no} \
 	--with-kernel-sources=/usr
 
 %{__make}
