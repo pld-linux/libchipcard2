@@ -1,25 +1,22 @@
 #
 # Conditional build:
-%bcond_with	sysfs	# use sysfs to scan for ttyUSB
+%bcond_without	sysfs	# don't use sysfs to scan for ttyUSB
 #
 Summary:	A library for easy access to smart cards (chipcards)
 Summary(pl):	Biblioteka do ³atwego dostêpu do kart procesorowych
 Name:		libchipcard2
-Version:	2.1.1
+Version:	2.1.3
 Release:	1
 License:	GPL v2 with OpenSSL linking exception
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libchipcard/%{name}-%{version}.tar.gz
-# Source0-md5:	d5180b672670dc26bf5a54f86b5577ec
+# Source0-md5:	dd750fb644ea9dba9e0bfa26838ed131
 URL:		http://www.libchipcard.de/
 BuildRequires:	gwenhywfar-devel >= 2.0.0
 BuildRequires:	libusb-devel
 BuildRequires:	opensc-devel >= 0.9.4
 BuildRequires:	pkgconfig
-%if %{with sysfs}
-BuildRequires:	sysfsutils-devel >= 1.3.0-3
-BuildRequires:	sysfsutils-devel < 2.0
-%endif
+%{?with_sysfs:BuildRequires:	sysfsutils-devel >= 1.3.0-3}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
