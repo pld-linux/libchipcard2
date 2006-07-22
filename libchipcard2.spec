@@ -5,12 +5,12 @@
 Summary:	A library for easy access to smart cards (chipcards)
 Summary(pl):	Biblioteka do ³atwego dostêpu do kart procesorowych
 Name:		libchipcard2
-Version:	2.1.4
+Version:	2.1.7
 Release:	1
 License:	GPL v2 with OpenSSL linking exception
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libchipcard/%{name}-%{version}.tar.gz
-# Source0-md5:	f9bbdb65dbaf89b990c34a923161803f
+# Source0-md5:	afb4d14b69660bf3c2476f328d3a3a86
 URL:		http://www.libchipcard.de/
 BuildRequires:	gwenhywfar-devel >= 2.0.0
 BuildRequires:	libusb-devel
