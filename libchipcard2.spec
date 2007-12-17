@@ -5,14 +5,15 @@
 Summary:	A library for easy access to smart cards (chipcards)
 Summary(pl.UTF-8):	Biblioteka do łatwego dostępu do kart procesorowych
 Name:		libchipcard2
-Version:	2.1.9
-Release:	1
+Version:	2.1.10
+Release:	0.1
 License:	GPL v2 with OpenSSL linking exception
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libchipcard/%{name}-%{version}.tar.gz
-# Source0-md5:	32a73973948f9011a2cd74ec10943f0a
+# Source0-md5:	0a8669ed2c996eb2816b8e125a9c68f2
 URL:		http://www.libchipcard.de/
-BuildRequires:	gwenhywfar-devel >= 2.0.0
+BuildRequires:	gwenhywfar-devel >= 2.3.0
+BuildRequires:	gwenhywfar-devel < 3.0.0
 BuildRequires:	libusb-devel
 BuildRequires:	opensc-devel >= 0.9.4
 BuildRequires:	pkgconfig
@@ -99,9 +100,19 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/rsacard2
 %attr(755,root,root) %{_sbindir}/chipcardd2
 %attr(755,root,root) %{_sbindir}/chipcardrd
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%attr(755,root,root) %{_libdir}/reader-lib*.so.*.*.*
-%attr(755,root,root) %{_libdir}/reader-lib*.so
+%attr(755,root,root) %{_libdir}/libchipcard2_ctapi.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libchipcard2_ctapi.so.0
+%attr(755,root,root) %{_libdir}/libchipcard2c.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libchipcard2c.so.0
+%attr(755,root,root) %{_libdir}/libchipcard2d.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libchipcard2d.so.0
+%attr(755,root,root) %{_libdir}/libchipcard2i.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libchipcard2i.so.0
+%attr(755,root,root) %{_libdir}/libchipcard2sv.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libchipcard2sv.so.0
+%attr(755,root,root) %{_libdir}/reader-libchipcard2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/reader-libchipcard2.so.0
+%attr(755,root,root) %{_libdir}/reader-libchipcard2.so
 %dir %{_libdir}/chipcard2-server
 %dir %{_libdir}/chipcard2-server/drivers
 %{_libdir}/chipcard2-server/drivers/*.xml
@@ -130,8 +141,16 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/chipcard2-server-config
 %attr(755,root,root) %{_bindir}/chipcard2-client-config
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libchipcard2_ctapi.so
+%attr(755,root,root) %{_libdir}/libchipcard2c.so
+%attr(755,root,root) %{_libdir}/libchipcard2d.so
+%attr(755,root,root) %{_libdir}/libchipcard2i.so
+%attr(755,root,root) %{_libdir}/libchipcard2sv.so
+%{_libdir}/libchipcard2_ctapi.la
+%{_libdir}/libchipcard2c.la
+%{_libdir}/libchipcard2d.la
+%{_libdir}/libchipcard2i.la
+%{_libdir}/libchipcard2sv.la
 %{_includedir}/chipcard2
 %{_includedir}/chipcard2-client
 %{_includedir}/chipcard2-server
