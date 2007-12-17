@@ -1,0 +1,13 @@
+--- libchipcard2-2.1.10/src/lib/chipcard2-server/server2/devicemanager/dm_reader.c.orig	2007-11-23 23:56:44.000000000 +0100
++++ libchipcard2-2.1.10/src/lib/chipcard2-server/server2/devicemanager/dm_reader.c	2007-12-17 17:42:57.349496104 +0100
+@@ -94,10 +94,6 @@
+   if (p)
+     r->readerName=strdup(p);
+ 
+-  p=GWEN_DB_GetCharValue(db, "driverName", 0, 0);
+-  if (p)
+-    r->driverName=strdup(p);
+-
+   p=GWEN_DB_GetCharValue(db, "shortName", 0, 0);
+   if (p)
+     r->shortDescr=strdup(p);
