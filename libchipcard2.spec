@@ -11,9 +11,13 @@ License:	GPL v2 with OpenSSL linking exception
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/libchipcard/%{name}-%{version}.tar.gz
 # Source0-md5:	0a8669ed2c996eb2816b8e125a9c68f2
+Patch0:		%{name}-reader.patch
 URL:		http://www.libchipcard.de/
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake
 BuildRequires:	gwenhywfar-devel >= 2.3.0
 BuildRequires:	gwenhywfar-devel < 3.0.0
+BuildRequires:	libtool
 BuildRequires:	libusb-devel
 BuildRequires:	opensc-devel >= 0.9.4
 BuildRequires:	pkgconfig
@@ -60,8 +64,14 @@ kart dla libchipcard.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 # pcmcia code needs fix to use userspace headers
 %configure \
 	%{!?with_sysfs:ac_cv_header_sysfs_libsysfs_h=no} \
